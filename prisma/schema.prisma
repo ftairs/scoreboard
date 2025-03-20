@@ -8,7 +8,7 @@ datasource db {
 }
 
 model scoreboard {
-  id          Int     @id @default(1)
+  id          Int     @id @default(1) @unique
   team1_score Int?    @default(0)
   team1_name  String? @default("lions") @db.VarChar(250)
   team1_color String? @default("#0000ff") @db.VarChar(250)
@@ -18,4 +18,6 @@ model scoreboard {
   timer       Int?    @default(0)
   period      Int?    @default(1)
   resetcount  Int?    @default(0)
+  team1_fouls Int?
+  team2_fouls Int?
 }

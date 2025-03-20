@@ -12,6 +12,8 @@ export async function GET(request: any) {
           // Fetch scoreboard data
           const scoreboard = await prisma.scoreboard.findFirst();
 
+          console.log({ scoreboard });
+
           // Handle the case where no data is found
           if (!scoreboard) {
             controller.enqueue(
@@ -21,9 +23,9 @@ export async function GET(request: any) {
             controller.enqueue(`data: ${JSON.stringify(scoreboard)}\n\n`);
           }
         } catch (error) {
-          console.error("Error fetching scoreboard data:", error);
+          console.error({ message: "Error fetching scoreboard data:", error });
           controller.enqueue(
-            `data: ${JSON.stringify({ message: "Internal Server Error" })}\n\n`
+            `data: ${JSON.stringify({ message: "Scoreboard not found" })}\n\n`
           );
         }
       }, 1000);
